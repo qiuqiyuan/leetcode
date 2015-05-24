@@ -5,7 +5,6 @@
 #include<vector>
 using namespace std;
 class Solution {
-    public:
     void do_reverse(string &s){
         int i = s[0]=='-' ? 1 : 0;
         int j = s.size() - 1;
@@ -18,21 +17,26 @@ class Solution {
         }
     }
     //takes in a string that represnts positive number only
-    long long str_2_long(string s){
-        long long sum = 0;
+    int str_2_long(string s){
+        int sum = 0;
+        const int MAXINT = (1L<<(sizeof(int)*8-1))-1;
         bool isNeg = s[0] == '-';
         for(int i = isNeg ? 1 : 0; i<s.size();i++){
             char c = s[i];
+            if(sum> MAXINT/10) return 0; // <--- I added this line
             sum = (c - '0') + sum*10;
         }
+        
         return isNeg ? -sum : sum;
     }
+public:
     int reverse(int x) {
         string s = to_string(x);
         do_reverse(s);
         return str_2_long(s);
     }
 };
+
 
 int main()
 {
