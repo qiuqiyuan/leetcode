@@ -4,17 +4,18 @@ nclude <iostream>
 using namespace std;
 
 class Solution {
-public:
-    bool isPalindrome(int x) {
-        if (x<0) return false;
-        int reverse = 0;
-        int cx = x;
+    int reverse(int x){
+        int res = 0;
         while(x != 0){
             int r = x%10;
-            reverse = reverse*10 + r;
+            res = res*10 + r;
             x /= 10;
         }
-        return reverse == cx;
+        return res;
+    }
+public:
+    bool isPalindrome(int x) {
+        return x>=0 && reverse(x) == x;
     }
 };
 
