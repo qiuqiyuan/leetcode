@@ -1,7 +1,7 @@
 class Solution {
 public:
     int numTrees(int n) {
-        int *dp = new int[n+1];
+        int *dp = new int[n+1]();
         dp[0] = 0;
         dp[1] = 1;
         for(int i=2;i<=n;i++){
@@ -11,6 +11,16 @@ public:
             }
             dp[i] = 2*dp[i-1] + st;
         }
+        return dp[n];
+    }
+
+    int numTrees1(int n){
+        int *dp = new int[n+1]();
+        dp[0] = 1;
+        dp[1] = 1;
+        for( int i=2; i<=n; i++)
+            for(int j=0; j<i; j++)
+                dp[i] += dp[j] * dp[i-1-j];
         return dp[n];
     }
 }; 
