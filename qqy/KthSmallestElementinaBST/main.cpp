@@ -64,3 +64,34 @@ public:
     }
 };
 
+//ref answer is neat in that  
+//whenever the program visit some node, that means I have resolve
+//a small part of my problem and hense the size of k reduces by 1.
+//This way the program does not need to save all results. 
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        stack<TreeNode*> ps;
+        while(!ps.empty() || root != NULL){
+            while(root){
+                ps.push(root);
+                root = root->left;
+            }
+            root = ps.top();
+            ps.pop();
+            k--;
+            if(k == 0) return root->val;
+            root = root->right;
+        }
+    }
+};
