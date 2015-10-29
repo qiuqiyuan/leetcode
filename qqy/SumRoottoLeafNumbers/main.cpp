@@ -89,3 +89,43 @@ public:
         return ans;
     }
 };
+
+//The following is a ref version
+//The main idea is to monipulate the val field directly
+//while traversing all the way down to the leave nodes.
+//
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int sumNumbers(TreeNode* root) {
+        if( root == NULL) return 0;
+        int sum = 0;
+        stack<TreeNode*> s;
+        s.push(root);
+        while(!s.empty()){
+            root = s.top();
+            s.pop();
+            if(root->left){
+                root->left->val += 10 * root->val;
+                s.push(root->left);
+            }
+            if(root->right){
+                root->right->val += 10 * root->val;
+                s.push(root->right);
+            }
+            if(!root->left && !root->right){
+                sum += root->val;
+            }
+        }
+        return sum;
+    }
+};
