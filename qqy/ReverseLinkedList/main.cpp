@@ -4,14 +4,7 @@
 //
 //What can I learn from this solution?
 //Should think about an elegant iterative solution.
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
@@ -23,5 +16,41 @@ public:
         node->next = head;
         head->next = nullptr;
         return rest;
+    }
+};
+
+
+//This recursive solution is O(2n) 
+//This is very neat
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(!head || !head->next) return head;
+        ListNode *rest = reverseList(head->next);
+        
+        head->next->next = head;
+        head->next = nullptr;
+        
+        return rest;
+    }
+};
+
+
+//iterative version
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode *h=nullptr, *p=nullptr;
+        //Think about this as mostly moving head pointer along, 
+        //but in between moving, change pointer direction and update new list head h.
+        while(head){
+            p = head->next;
+
+            head->next = h;
+            h = head;
+        
+            head = p;
+        }
+        return h;
     }
 };
