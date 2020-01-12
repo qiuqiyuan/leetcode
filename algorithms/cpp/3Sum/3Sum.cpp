@@ -30,7 +30,7 @@ using namespace std;
 
 
 /*
- *   Simlar like "Two Number" problem, we can have the simlar solution.
+ *   Similar like "Two Number" problem, we can have the simlar solution.
  *
  *   Suppose the input array is S[0..n-1], 3SUM can be solved in O(n^2) time on average by 
  *   inserting each number S[i] into a hash table, and then for each index i and j,  
@@ -47,6 +47,7 @@ using namespace std;
 vector<vector<int> > threeSum(vector<int> &num) {
 
     vector< vector<int> > result;
+    if(num.size()==0 || num.size()==1 || num.size() == 2) return result;
 
     //sort the array, this is the key
     sort(num.begin(), num.end());
@@ -71,7 +72,7 @@ vector<vector<int> > threeSum(vector<int> &num) {
                 result.push_back(v);
                 // Continue search for all triplet combinations summing to zero.
                 //skip the duplication
-                while(low<n && num[low]==num[low+1]) low++; 
+                while(low<n-1 && num[low]==num[low+1]) low++; 
                 while(high>0 && num[high]==num[high-1]) high--; 
                 low++;
                 high--;
@@ -81,7 +82,7 @@ vector<vector<int> > threeSum(vector<int> &num) {
                 high--;
             } else{
                 //skip the duplication
-                while(low<n && num[low]==num[low+1]) low++;
+                while(low<n-1 && num[low]==num[low+1]) low++;
                 low++;
             } 
         }

@@ -41,7 +41,7 @@ public:
         int i = 0, poz = 0;
         for(i = 0; i < nums.size() && poz < nums.size(); i++)
         {
-                while(nums[poz] == 0)
+                while(poz < nums.size() && nums[poz] == 0)
                     poz++;
                 if(poz < nums.size())
                     nums[i] = nums[poz];
@@ -62,7 +62,7 @@ public:
      * We have two pointers to travel the array, assume they named `p1` and `p2`.
      * 
      *   1) `p1` points the tail of current arrays without any ZEROs.
-     *   2) `p2` points the head of the reset array which skips the ZEROs.
+     *   2) `p2` points the head of the rest array which skips the ZEROs.
      * 
      * Then we can just simply move the item from `p2` to `p1`.
      *
@@ -72,7 +72,7 @@ public:
 
         // Find the first ZERO, where is the tail of the array.
         // (Notes: we can simply remove this!)
-        for (; nums[p1]!=0 && p1<nums.size(); p1++);
+        for (; p1<nums.size() && nums[p1]!=0; p1++);
         
         // copy the item from p2 to p1, and skip the ZERO
         for (p2=p1; p2<nums.size(); p2++) {
@@ -80,6 +80,7 @@ public:
             nums[p1++] = nums[p2]; 
         }    
         
+        //set ZERO for rest items 
         while ( p1<nums.size() ) nums[p1++] = 0;
     }
 
