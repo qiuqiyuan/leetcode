@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-AUTHOR="NOBODY"
+AUTHOR="mqiu"
 COMMENT_TAG="//"
 FILE_EXT=".cpp"
 
